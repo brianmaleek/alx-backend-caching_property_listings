@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.http import JsonResponse
 from .models import Property
-from .utils import get_all_properties
+from .utils import get_all_properties, get_redis_cache_metrics
 
 # Create your views here.
 @cache_page(60 * 15) #cache for 15 minutes (60 seconds * 15 minutes)
@@ -33,3 +33,16 @@ def property_list(request):
         'properties': property_data,
         'count': len(property_data)
     })
+
+def cache_metrics(request):
+    """
+    View to retrieve Redis cache metrics
+
+    Args:
+        request (HttpRequest): The HTTP request object
+
+    Returns:
+        JsonResponse: JSON response containing the cache metrics
+    """
+    metrics = get_redis_cache_metrics()
+    return JsonResponse(metrics)
