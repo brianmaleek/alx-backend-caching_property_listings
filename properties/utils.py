@@ -22,11 +22,3 @@ def get_all_properties():
     cache.set('all_properties', properties, 3600)  
 
     return properties
-
-def invalidate_properties_cache():
-    """
-    Invalidates the cache for properties.
-    This should be called whenever properties are updated or deleted.
-    """
-    cache.delete('all_properties')
-    print("Cache invalidated for all properties.")
