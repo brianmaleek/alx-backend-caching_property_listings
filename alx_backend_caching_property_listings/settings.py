@@ -146,3 +146,25 @@ CACHES = {
         }
     }
 }
+
+# Add this to your existing settings
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'django.log',
+        },
+    },
+    'loggers': {
+        'properties': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    },
+}
