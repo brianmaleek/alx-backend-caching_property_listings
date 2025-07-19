@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.http import JsonResponse
 from .models import Property
+from .utils import get_all_properties
 
 # Create your views here.
 @cache_page(60 * 15) #cache for 15 minutes (60 seconds * 15 minutes)
@@ -13,9 +14,9 @@ def property_list(request):
         request (HttpRequest): The HTTP request object
 
     Returns:
-        _type_: _description_
+        JsonResponse: JSON response containing the list of properties
     """
-    properties = Property.objects.all()
+    properties = get_all_properties()
     
     #convert the properties to a list of dictionaries
     property_data = []
